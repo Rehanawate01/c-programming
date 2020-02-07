@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#define len 5
+char * strcpyy(char* d,char* s)
+{
+    int i=0;
+    while(*(s+i)!='\0')
+    {
+        *(d+i)=*(s+i);
+i++;
+    }
+
+    *(d+i)!='\0';
+    return d;
+}
+int main()
+{
+    char  src[len],des[len],*ptr=NULL;
+    printf("enter the src string");
+    scanf("%s",src);
+
+ptr= strcpyy(des,src);
+
+printf(" des string is= %s",des);
+return 0;}
