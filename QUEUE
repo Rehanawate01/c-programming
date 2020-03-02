@@ -1,0 +1,121 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 10
+void Enqueue();
+void Dequeue();
+int IsFull();
+int IsEmpty();
+
+struct Student {
+	int rollNo;
+	char name[10];
+	int std;
+	char sub[10][50];
+	int mark[10];
+};
+char subject[10][50] = { "Botany","Physics", "Chemistry 1", "Maths", "Chemistry 2",
+			"Electronics"};
+struct Student student[SIZE];
+int rear = -1, front = -1;
+
+int main(void) {
+
+
+	int choice;
+	do {
+		printf("\n\nChoose operation to perform: ");
+		printf("\n1) Add a Student");
+		printf("\n2) Remove a Student");
+		printf("\n3) Display");
+		printf("\n4) Exit");
+		printf("\n Enter a Choice : ");
+		scanf("%d", &choice);
+
+		switch (choice) {
+		case 1:
+			if (IsFull())
+				printf("\nQueue is Full");
+			else
+				Enqueue();
+			break;
+		case 2:
+			if (IsEmpty())
+				printf("\nQueue is Empty");
+			else
+				Dequeue();
+			break;
+		case 3:
+			if (IsEmpty())
+				printf("\nQueue is Empty");
+			else
+				Display();
+		}
+	} while (choice != 4);
+
+	return EXIT_SUCCESS;
+}
+
+int IsEmpty() {
+	if (front == rear && rear == -1)
+		return 1;
+	else
+		return 0;
+}
+int IsFull() {
+	if (((front - rear) == 1) || (front == 0 && (rear == SIZE - 1)))
+		return 1;
+	else
+		return 0;
+}
+void Enqueue() {
+	rear = (rear + 1) % SIZE;
+	printf("\nEnter Roll No : ");
+	scanf("%d",&student[rear].rollNo);
+	printf("\nEnter Name of Student : ");
+	scanf("%s",student[rear].name);
+	fflush(stdin);
+	printf("\n Enter Standard of Student : ");
+	scanf("%d",&student[rear].std);
+	printf("\n Enter marks obtained by student : ");
+	printf("\n Subject   Marks");
+
+	for(int i=0;i<6;i++){
+		strcpy(student[rear].sub[i],subject[i]);
+		printf("\n%d) %s ",i+1,subject[i]);
+		scanf("%d",&student[rear].mark[i]);
+	}
+	if (front == -1)
+		front++;
+	printf("\n Student info is successfully added");
+}
+
+void Dequeue() {
+	if (front == rear)
+		front = rear = -1; // It is almost like resetting the starting point of queue
+	else
+		front = (front + 1) % SIZE;
+	printf("\n Student info is successfully Removed");
+}
+
+void Display() {
+	int r = rear, f = front;
+	while (f != r) {
+			printf("\n\n Student roll No : %d",student[f].rollNo);
+			printf("\n Student Name : %s",student[f].name);
+			printf("\n Student Standard : %d",student[f].std);
+			printf("\n Student Subjects and Marks : ");
+			printf("\n Subject   Marks");
+			for(int i=0;i<6;i++){
+				printf("\n%d) %s %d",i+1,student[f].sub[i],student[f].mark[i]);
+		}
+		f = (f + 1) % SIZE;
+	}
+	printf("\n\n Student roll No : %d", student[f].rollNo);
+	printf("\n Student Name : %s", student[f].name);
+	printf("\n Student Standard : %d", student[f].std);
+	printf("\n Student Subjects and Marks : ");
+	printf("\n Subject   Marks");
+	for (int i = 0; i < 6; i++) {
+		printf("\n%d) %s %d", i + 1, student[f].sub[i], student[f].mark[i]);
+	}
+}
