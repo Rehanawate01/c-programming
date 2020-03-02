@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include<stdlib.h>
+int p1;
+void WriteArray(int a[], int len);
+void PrintArray( int *a, int len);
+int ArraySum( int a[], int len);
+int ArrayMax( int a[], int len);
+int ArrayMin( int a[], int len);
+int Options();
+int len;
+int main(void)
+{
+	int  choice, ans, ans1,no1,p1,v1,new1;
+	printf("\n How many elements you want :: ");
+	scanf("%d", &len);
+ int* arr = (int*)calloc(len, sizeof(int));
+
+	do
+	{
+
+		choice= Options();
+		switch(choice)
+		{
+			default: printf("\n invalid choice :: ");
+					continue;
+			case 0 :// exit
+					return 0;
+
+			case 1: // accept array
+					printf("\n enter elements of array :: ");
+					WriteArray(arr, len);
+					break;
+			case 2: // print array
+					printf("\n Elements of array :: ");
+					PrintArray(arr, len);
+					break;
+
+			case 3: // sum of array
+					printf("\n Elements of array :: ");
+					PrintArray(arr, len);
+					ans=ArraySum(arr, len);
+					printf("\n sum=%d", ans);
+					break;
+			case 4: // max of array
+					printf("\n Elements of array :: ");
+					PrintArray(arr, len);
+
+					ans=ArrayMax(arr, len);
+					printf("\n max=%d", ans);
+					break;
+			case 5: // print  min
+					printf("\n Elements of array :: ");
+					PrintArray(arr, len);
+
+					ans=ArrayMin(arr,len);
+					printf("\n min=%d", ans);
+					break;
+            case 6:
+					printf("\n which position u want to delete :: ");
+					scanf("%d",&no1);
+					DeleteArray(arr, no1);
+
+				      PrintArray(arr, len);
+
+
+					break;
+            case 7:
+					printf("\n enter  specific position :: ");
+					scanf("%d",&p1);
+					printf("\n entre value  ");
+					scanf("%d",&v1);
+
+                      if((arr[p1])==0)
+                      {
+                           arr[p1]=v1;
+
+
+				      PrintArray(arr, len);
+                      }
+                      else{
+                        printf("given position is full");
+                      }
+                    break;
+
+
+		}
+
+		printf("\n Enter 1 to continue or 0 to exit :: ");
+		scanf("%d", &choice);
+
+	}while(choice!=0);
+	printf("\n\n\n");
+
+
+	return 0;
+}
+void WriteArray(int a[], int len)
+{
+	int index;
+	for(index=0;index<len; ++index)
+	{
+		printf("\n arr[%d]", index);
+		scanf("%d", &a[index]);
+	}
+	return;
+}
+void PrintArray( int *a, int len)
+{
+	int index;
+	for(index=0; index<len; index++)
+	{
+		printf("\n a[%d] %-10d [%u]", index, a[index], &a[index]);
+	}
+	return;
+}
+
+int Options()
+{
+	int choice;
+
+	printf("\n 1. Accept Array \n 2. Print Array \n 3. sum \n 4. max \n 5. min \n 6.Delete  \n  0. Exit \n 7.Add at pstion ");
+//printf("\n 5. min \n 0. Exit   ");
+
+	printf("\n Enter Your choice :: ");
+	scanf("%d",&choice);
+
+	return choice;
+}
+
+int ArraySum( int a[], int len)
+{
+	int index, sum;
+	for(index=sum=0; index<len; index++)
+	{
+		sum+= *(a+index);//sum+=a[index];
+	}
+	return sum;
+}
+int ArrayMax( int a[], int len)
+{
+	int index, max;
+	for(max= a[0],index=1; index<len; index++ )
+	{
+		if(max < a[index])
+			max= a[index];
+	}
+	return max;
+}
+int ArrayMin( int a[], int len)
+{
+	int index, min;
+	for(min= a[0],index=1; index<len; index++ )
+	{
+		if(min >a[index])
+			min= a[index];
+	}
+	return min;
+}
+int DeleteArray(int arr[],int no1)
+{
+    free(arr[no1]);
+    arr[no1]=NULL;
+
+    return arr[no1];
+}
