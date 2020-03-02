@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<string.h>
+#define len 5
+#include<stdlib.h>
+ int  CompareTwoStrings ( char *StringOne, char *StringTwo ) {
+        int temp;
+
+        if  ( strlen ( StringOne ) == strlen ( StringTwo ) )
+     {
+            temp='0';
+
+     }
+
+        if  ( strlen ( StringOne ) < strlen ( StringTwo ) ) {
+           temp='1';
+        }
+        if  ( strlen ( StringOne ) > strlen ( StringTwo ) ) {
+            temp='2';
+        }
+
+    return temp;
+}
+
+int main()
+{
+        char src[len],des[len];
+        int tr;
+
+
+  printf("entre the src");
+ scanf("%s",src);
+ printf("entre the des");
+ scanf("%s",des);
+tr= CompareTwoStrings ( src, des );
+if(tr=='0')
+printf("equal");
+if(tr=='2')
+printf("string one is greater");
+if(tr=='1')
+printf("string one is less");
+
+
+    return 0;
+}
+
